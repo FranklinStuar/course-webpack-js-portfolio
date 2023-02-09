@@ -161,3 +161,23 @@ module.exports = {
 
 
 RESUMEN: Puedes dar soporte a CSS en webpack mediante loaders y plugins, además que puedes dar superpoderes al mismo con las nuevas herramientas conocidas como pre procesadores y post procesadores
+
+
+_Para sass_
+
+```sh
+npm i -D node-sass sass-loader
+```
+
+Añadimos el loader al arreglo de loaders y modificamos un poco la expresion regular en webpack
+
+```js
+{
+  test: /\.s?css$/,
+  use: [
+      MiniCssExtractPlugin.loader,
+      "css-loader",
+      "sass-loader" // esta línea se agrega
+    ]
+},
+```
