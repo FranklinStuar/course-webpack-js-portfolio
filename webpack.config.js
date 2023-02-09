@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production', // LE INDICO EL MODO EXPLICITAMENTE
@@ -21,8 +22,15 @@ module.exports = {
         test: /\.m?js$/, // LEE LOS ARCHIVOS CON EXTENSION .JS,
         exclude: /node_modules/, // IGNORA LOS MODULOS DE LA CARPETA
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         }
+      },
+      {
+        test: /\.(css|styl)$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+        ]
       }
     ]
   },
@@ -32,6 +40,7 @@ module.exports = {
       inject: true, // INYECTA EL BUNDLE AL TEMPLATE HTML
       template: './public/index.html', // LA RUTA AL TEMPLATE HTML
       filename: './index.html' // NOMBRE FINAL DEL ARCHIVO EN DIST
-    })
+    }),
+    new MiniCssExtractPlugin(),
   ]
 }
